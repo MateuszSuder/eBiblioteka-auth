@@ -1,0 +1,89 @@
+openapi: 3.0.3
+info:
+  title: Auth service
+  description: |-
+  version: 1.0.0
+paths:
+  /authorize:
+    get:
+      description: Waliduje token
+      responses:
+        200: 
+          description: Token poprawny
+        401:
+          description: Token niepoprawny
+  /register:
+    post:
+      description: Rejestruje użytkownika
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserRegister"
+      responses:
+        201: 
+          description: Użytkownik utworzony
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserRegister"
+        400:
+          description: Dane niepoprawne
+  /login:
+    post:
+      description: Waliduje token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserLogin"
+      responses:
+        200: 
+          description: Użytkownik zalogowany
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserRegister"
+        400:
+          description: Dane niepoprawne
+components:
+  schemas:
+    UserRegister:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        name:
+          type: string
+        lastName:
+          type: string
+        dateOfBirth:
+          type: string
+          pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
+          example: "2019-05-17"
+        address:
+          $ref: "#/components/schemas/Address"
+    Address:
+      type: object
+      properties:
+        city:
+          type: string
+        street:
+          type: string
+        postal:
+          type: string
+        houseNumber:
+          type: string
+        apartmentNumber:
+          type: string
+    UserLogin:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
