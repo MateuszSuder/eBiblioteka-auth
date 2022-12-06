@@ -1,8 +1,14 @@
 import mongoose, {Schema} from "mongoose";
 
-const registerSchema = new Schema({
-    email: String,
-    password: String,
+const RegisterSchema = new Schema({
+    email: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
     name: String,
     lastName: String,
     dateOfBirth: Date,
@@ -12,7 +18,7 @@ const registerSchema = new Schema({
         postal: String,
         houseNumber: String,
         apartmentNumber: String
-    }
+    },
 })
 
-export default mongoose.model("registerSchema", registerSchema);
+export default mongoose.model("registerSchema", RegisterSchema);

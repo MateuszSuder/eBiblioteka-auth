@@ -1,17 +1,24 @@
-export default async (req, res) => {
-    const { email, password, name, lastName, dateOfBirth,
-        address: { city, street, postal, houseNumber, apartmentNumber }
-    } = req.body;
+import internalFetcher from "../../http/internalFetcher.js";
+import RegisterSchema from "../../schemas/RegisterSchema.js";
 
-    console.log("register", req.body);
+export default async (req, res) => {
+    // const { email, password, name, lastName, dateOfBirth,
+    //     address: { city, street, postal, houseNumber, apartmentNumber }
+    // } = req.body;
+
+    const user = new RegisterSchema({...req.body});
+    try {
+        await user.save();
+    } catch (e) {
+
+    }
+
+
 
     try {
-        const response = await fetch("http://user-service:4001/health", {
-            method: "GET"
-        })
+        const response = await internalFetcher("user", "GET", "health");
 
-        const body = await response.text();
-        console.log(body);
+        console.log(response);
     } catch (e) {
         console.log(1, e);
         console.log(2, e.cause);

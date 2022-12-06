@@ -44,7 +44,7 @@ async function parseResponseContent(response) {
  * @param {"auth" | "user" | "book" | "reservation" | "borrowing" | "notification"} service service to which create request
  * @param {"POST" | "GET" | "PUT" | "DELETE"} method
  * @param {string} path endpoint path
- * @param options options for request
+ * @param [options] options for request
  * @param {object} [options.body]
  * @param {HeadersInit} [options.headers]
  * @param {boolean} [options.key]
@@ -55,15 +55,15 @@ export default async function internalFetcher(service, method, path, options) {
         headers: {}
     };
 
-    if(options.key) {
+    if(options?.key) {
         optionsInit.headers["X-API-KEY"] = process.env.API_KEY;
     }
 
-    if(options.body) {
+    if(options?.body) {
         optionsInit.body = JSON.stringify(options.body);
     }
 
-    if(options.headers) {
+    if(options?.headers) {
         optionsInit.headers = {
             ...optionsInit.headers,
             ...options.headers
