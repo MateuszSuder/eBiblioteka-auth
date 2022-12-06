@@ -1,4 +1,4 @@
-import app from "./server/router.js";
+import router from "./server/router.js";
 import connectDb from "./config/db.js";
 import express from "express";
 
@@ -7,6 +7,9 @@ import express from "express";
     const port = process.env.PORT;
     if(!port) throw new Error("No port specified");
 
+    const app = express();
+
+    app.use("/api", router);
     app.use(express.json());
 
     app.listen(port, async () => {
