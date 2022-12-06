@@ -1,7 +1,7 @@
 export default async (req, res) => {
-    // const { email, password, name, lastName, dateOfBirth,
-    //     address: { city, street, postal, houseNumber, apartmentNumber }
-    // } = req.body;
+    const { email, password, name, lastName, dateOfBirth,
+        address: { city, street, postal, houseNumber, apartmentNumber }
+    } = req.body;
 
     console.log("register", req.body);
 
