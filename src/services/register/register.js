@@ -1,5 +1,6 @@
 import internalFetcher from "../../http/internalFetcher.js";
 import RegisterSchema from "../../schemas/RegisterSchema.js";
+import mongooseErrorResponse from "../../utils/mongooseErrorResponse.js";
 
 export default async (req, res) => {
     // const { email, password, name, lastName, dateOfBirth,
@@ -10,7 +11,7 @@ export default async (req, res) => {
     try {
         await user.save();
     } catch (e) {
-
+        return mongooseErrorResponse(res, e);
     }
 
 

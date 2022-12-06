@@ -6,6 +6,6 @@
  */
 export default function genericErrorResponse(response, message, status) {
     return response.status(status).send({
-        error: message
+        errors: message
     });
 }
