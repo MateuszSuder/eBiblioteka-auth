@@ -1,4 +1,5 @@
 import mongoose, {Schema} from "mongoose";
+import AddressSchema from "./AddressSchema.js";
 
 const RegisterSchema = new Schema({
     email: {
@@ -9,16 +10,22 @@ const RegisterSchema = new Schema({
         type: String,
         required: true
     },
-    name: String,
-    lastName: String,
-    dateOfBirth: Date,
-    address: {
-        city: String,
-        street: String,
-        postal: String,
-        houseNumber: String,
-        apartmentNumber: String
+    name: {
+        type: String,
+        required: true
     },
+    lastName: {
+        type: String,
+        required: true
+    },
+    dateOfBirth: {
+        type: Date,
+        required: true
+    },
+    address: {
+        type: AddressSchema,
+        required: true
+    }
 })
 
 export default mongoose.model("registerSchema", RegisterSchema);

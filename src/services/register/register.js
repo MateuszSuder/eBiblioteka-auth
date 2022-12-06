@@ -14,8 +14,6 @@ export default async (req, res) => {
         return mongooseErrorResponse(res, e);
     }
 
-
-
     try {
         const response = await internalFetcher("user", "GET", "health");
 
