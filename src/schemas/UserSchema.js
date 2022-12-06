@@ -1,7 +1,26 @@
 import mongoose, {Schema} from "mongoose";
-import AddressSchema from "./AddressSchema.js";
 
-const RegisterSchema = new Schema({
+const AddressSchema = new Schema({
+    city: {
+        type: String,
+        required: true
+    },
+    street: {
+        type: String,
+        required: true
+    },
+    postal: {
+        type: String,
+        required: true
+    },
+    houseNumber: {
+        type: Date,
+        required: true
+    },
+    apartmentNumber: String
+});
+
+const UserSchema = new Schema({
     email: {
         type: String,
         required: true
@@ -26,6 +45,6 @@ const RegisterSchema = new Schema({
         type: AddressSchema,
         required: true
     }
-})
+});
 
-export default mongoose.model("registerSchema", RegisterSchema);
+export default mongoose.model("registerSchema", UserSchema);
