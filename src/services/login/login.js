@@ -22,7 +22,7 @@ export default async (req, res) => {
             const token = jwt.sign({
                 ...rest
             }, process.env.AUTH_SECRET, {
-                expiresIn: "15s"
+                expiresIn: "30d"
             })
 
             return res.cookie("token", token, { maxAge: 2592000000, httpOnly: true }).status(200).send({ success: true });

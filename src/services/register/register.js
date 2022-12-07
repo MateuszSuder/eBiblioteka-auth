@@ -19,8 +19,7 @@ export default async (req, res) => {
         const response = await internalFetcher("user", "POST", "user", {
             body: {
                 ...req.body,
-                password: hashedPassword,
-                role: "USER"
+                password: hashedPassword
             }
         });
 
