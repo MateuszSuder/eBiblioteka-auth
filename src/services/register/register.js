@@ -3,17 +3,6 @@ import genericErrorResponse from "../../utils/genericErrorResponse.js";
 import bcrypt from "bcrypt";
 
 export default async (req, res) => {
-    // const { email, password, name, lastName, dateOfBirth,
-    //     address: { city, street, postal, houseNumber, apartmentNumber }
-    // } = req.body;
-
-    // const user = new RegisterSchema({...req.body});
-    // try {
-    //     await user.save();
-    // } catch (e) {
-    //     return mongooseErrorResponse(res, e);
-    // }
-
     const { password } = req.body;
 
     if(!password) {
@@ -25,16 +14,18 @@ export default async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    console.log(hashedPassword);
 
     try {
-        const response = await internalFetcher("user", "GET", "health");
+        const response = await internalFetcher("user", "POST", "user", {
+            body: {
+                ...req.body,
+                password: hashedPassword
+            }
+        });
 
         console.log(response);
     } catch (e) {
-        console.log(1, e);
-        console.log(2, e.cause);
-        console.log(3, e.headers);
+        return res.status(e.status).send(e);
     }
 
 

@@ -52,7 +52,9 @@ async function parseResponseContent(response) {
  */
 export default async function internalFetcher(service, method, path, options) {
     let optionsInit = {
-        headers: {}
+        headers: {
+            "Content-type": "application/json"
+        }
     };
 
     if(options?.key) {
@@ -76,7 +78,10 @@ export default async function internalFetcher(service, method, path, options) {
     });
 
     if(!response.ok) {
-        throw new Error(await parseResponseContent(response));
+        throw {
+            ...(await parseResponseContent(response)),
+            status: response.status
+        };
     }
 
     return await parseResponseContent(response);
