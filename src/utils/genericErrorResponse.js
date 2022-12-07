@@ -6,6 +6,7 @@
  */
 export default function genericErrorResponse(response, message, status) {
     if(!Array.isArray(message)) message = [message];
+
     return response.status(status).send({
         errors: message
     });

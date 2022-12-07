@@ -1,3 +1,10 @@
+/**
+ * @typedef FetchError
+ * @type {object}
+ * @property {Array<string>} errors errors which occurred
+ * @property {number} status http status
+ */
+
 export const services = {
     auth: {
         name: process.env.AUTH_NAME,
@@ -49,6 +56,7 @@ async function parseResponseContent(response) {
  * @param {HeadersInit} [options.headers] headers to be passed
  * @param {boolean} [options.key] if api key should be used
  * @param {object} [options.query] query parameters
+ * @throws {FetchError} on fetch error
  * @return {Promise<*>}
  */
 export default async function internalFetcher(service, method, path, options) {
