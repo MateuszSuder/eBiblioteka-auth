@@ -20,7 +20,8 @@ export default async (req, res) => {
             body: {
                 ...req.body,
                 password: hashedPassword
-            }
+            },
+            key: true
         });
 
         res.status(201).send(response);

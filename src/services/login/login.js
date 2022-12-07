@@ -11,7 +11,8 @@ export default async (req, res) => {
             query: {
                 email,
                 includePassword: 1
-            }
+            },
+            key: true
         })
 
         if(!hashedPassword) {
