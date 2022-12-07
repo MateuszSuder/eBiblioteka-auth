@@ -19,15 +19,13 @@ export default async (req, res) => {
         const response = await internalFetcher("user", "POST", "user", {
             body: {
                 ...req.body,
-                password: hashedPassword
+                password: hashedPassword,
+                role: "USER"
             }
         });
 
-        console.log(response);
+        res.status(201).send(response);
     } catch (e) {
         return res.status(e.status).send(e);
     }
-
-
-    res.send("register");
 }

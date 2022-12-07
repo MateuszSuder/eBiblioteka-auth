@@ -45,12 +45,14 @@ async function parseResponseContent(response) {
  * @param {"POST" | "GET" | "PUT" | "DELETE"} method
  * @param {string} path endpoint path
  * @param [options] options for request
- * @param {object} [options.body]
- * @param {HeadersInit} [options.headers]
- * @param {boolean} [options.key]
+ * @param {object} [options.body] body to be sent
+ * @param {HeadersInit} [options.headers] headers to be passed
+ * @param {boolean} [options.key] if api key should be used
+ * @param {object} [options.query] query parameters
  * @return {Promise<*>}
  */
 export default async function internalFetcher(service, method, path, options) {
+    let query = "";
     let optionsInit = {
         headers: {
             "Content-type": "application/json"
@@ -72,7 +74,11 @@ export default async function internalFetcher(service, method, path, options) {
         }
     }
 
-    const response = await fetch(`http://${services[service].name}:${services[service].port}/api/${path}`, {
+    if(options?.query) {
+        query = `?${new URLSearchParams(options.query).toString()}`
+    }
+
+    const response = await fetch(`http://${services[service].name}:${services[service].port}/api/${path}${query}`, {
         method,
         ...optionsInit
     });
