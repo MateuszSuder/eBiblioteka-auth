@@ -15,9 +15,7 @@ export default async (req, res) => {
             key: true
         })
 
-        if(!hashedPassword) {
-            return genericErrorResponse(res, "Invalid credentials", 401);
-        }
+        if(!hashedPassword) return genericErrorResponse(res, "Invalid credentials", 401);
 
         if(await bcrypt.compare(password, hashedPassword)) {
             const token = jwt.sign({
