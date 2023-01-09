@@ -7,7 +7,7 @@ export default async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        const { password: hashedPassword, ...rest } = await internalFetcher("user", "GET", "user", {
+        const { password: hashedPassword, ...rest } = await internalFetcher("user", "GET", "", {
             query: {
                 email,
                 includePassword: 1
@@ -24,7 +24,7 @@ export default async (req, res) => {
                 expiresIn: "30d"
             })
 
-            return res.cookie("token", token, { maxAge: 2592000000, httpOnly: true }).status(200).send({ success: true });
+            return res.cookie("token", token, { maxAge: 2592000000, httpOnly: true }).status(200).send({ ...rest });
         }
     } catch (e) {
         return res.status(e.status).send(e);

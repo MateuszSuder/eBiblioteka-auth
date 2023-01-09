@@ -16,7 +16,7 @@ export default async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     try {
-        const response = await internalFetcher("user", "POST", "user", {
+        const response = await internalFetcher("user", "POST", "", {
             body: {
                 ...req.body,
                 password: hashedPassword
