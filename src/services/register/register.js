@@ -9,7 +9,7 @@ export default async (req, res) => {
         return genericErrorResponse(res, "Password is required", 400);
     }
 
-    if(password < 8) {
+    if(password.length < 8) {
         return genericErrorResponse(res, "Password must be at least 8 characters", 400);
     }
 
