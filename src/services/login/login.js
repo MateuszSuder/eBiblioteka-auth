@@ -15,8 +15,11 @@ export default async (req, res) => {
             key: true
         })
 
+        console.log(password, hashedPassword);
+
         if(!hashedPassword) return genericErrorResponse(res, "Invalid credentials", 401);
 
+        console.log(2);
         if(await bcrypt.compare(password, hashedPassword)) {
             const token = jwt.sign({
                 ...rest
@@ -25,10 +28,10 @@ export default async (req, res) => {
             })
 
             return res.cookie("token", token, { maxAge: 2592000000, httpOnly: true }).status(200).send({ ...rest });
+        } else {
+            genericErrorResponse(res, "Invalid credentials", 401);
         }
     } catch (e) {
         return res.status(e.status).send(e);
     }
-
-    genericErrorResponse(res, "Invalid credentials", 401);
 }
