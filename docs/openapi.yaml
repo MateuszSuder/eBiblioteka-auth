@@ -56,6 +56,28 @@ paths:
                 example: token=ABA2231AS.12AS.DAS
         400:
           description: Dane niepoprawne
+  /encrypt:
+    post:
+      description: Szyfruje podaną frazę
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                value:
+                  type: string
+      responses:
+        200:
+          description: Fraza zaszyfrowana
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  encrypted:
+                    type: string
 components:
   schemas:
     UserRegister:
